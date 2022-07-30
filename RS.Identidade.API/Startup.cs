@@ -1,12 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using RS.Identidade.API.Data;
+using static RS.Identidade.API.Infra.CrossCutting.CrossDependency;
 
 namespace RS.Identidade.API
 {
@@ -21,15 +19,7 @@ namespace RS.Identidade.API
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options => 
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnections")));
-
-            services
-                .AddDefaultIdentity<IdentityUser>()
-                .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
-
+            services.ConfigureDependencyInjection(Configuration);
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
