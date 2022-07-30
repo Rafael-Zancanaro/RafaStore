@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace RS.Identidade.API.Data
+namespace RS.Identidade.API.Infra.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
