@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace RS.Core
+﻿namespace RS.Core
 {
     public class Class1
     {
