@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using RS.Identidade.API.Infra.Data;
 using RS.Identidade.API.Models.Extentions;
+using RS.Identidade.API.Models.Interfaces;
+using RS.Identidade.API.Services;
 using System.Text;
 
 namespace RS.Identidade.API.Infra.CrossCutting
@@ -17,7 +19,8 @@ namespace RS.Identidade.API.Infra.CrossCutting
             services
                 .ConfigureIdentity()
                 .ConfigureJwtToken(configuration)
-                .AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnections")));
+                .AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnections")))
+                .AddTransient<IJwtServices, JwtServices>();
 
             return services;
         }
@@ -62,6 +65,6 @@ namespace RS.Identidade.API.Infra.CrossCutting
             });
 
             return services;
-        } 
+        }
     }
 }
