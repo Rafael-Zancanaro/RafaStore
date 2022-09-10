@@ -7,10 +7,30 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.17" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Models\InputModel\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RS.Identity.API\RS.Identity.API.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="ServiceResource.Designer.cs">
+      <DependentUpon>ServiceResource.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="ServiceResource.resx">
+      <LastGenOutput>ServiceResource.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

@@ -19,6 +19,7 @@ namespace RS.Identity.API.Controllers
         protected ActionResult CustomResponse(ModelStateDictionary modelState)
         {
             var result = new ResultViewModel<UserToken>();
+
             var errors = modelState.Values.SelectMany(x => x.Errors);
 
             foreach (var error in errors)

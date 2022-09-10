@@ -13,7 +13,7 @@ namespace RS.Identity.API
     {
         public IConfiguration Configuration { get; }
 
-        public Startup(IHostEnvironment environment)
+        public Startup(IHostEnvironment environment, IConfiguration configuration)
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(environment.ContentRootPath)
@@ -21,12 +21,8 @@ namespace RS.Identity.API
                 .AddJsonFile($"appsettings.{environment.EnvironmentName}.json", true, true)
                 .AddEnvironmentVariables();
 
-            if (environment.IsDevelopment())
-            {
-                builder.AddUserSecrets<Startup>();
-            }
-
             Configuration = builder.Build();
+
         }
 
         public void ConfigureServices(IServiceCollection services)

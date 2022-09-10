@@ -5,22 +5,24 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RS.Web.MVC.Configuration;
 using static RS.Web.MVC.Configuration.IdentityConfig;
+using static RS.Web.MVC.Infra.CrossCutting;
 
 namespace RS.Web.MVC
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddIdentityConfiguration();
             services.AddControllersWithViews();
+            services.ConfigureServices(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

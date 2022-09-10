@@ -1,8 +1,11 @@
-﻿<ul class="navbar-nav">
-    @if(Context.User.Identity.IsAuthenticated)
+﻿@using RS.Web.MVC.Models.Interfaces
+@inject IAspNetUser AppUser;
+
+<ul class="navbar-nav">
+    @if(AppUser.IsAuthenticated())
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" title="Manage">Hello User</a>
+            <a class="nav-link text-dark" title="Manage">Hello @AppUser.GetUserEmail()</a>
         </li>
 
         <li class="nav-item">

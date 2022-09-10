@@ -33,6 +33,7 @@ namespace RS.Identity.API.Services
         public async Task<ResultViewModel<UserAswerLogin>> UserRegistration(UserRegistrationInputModel userRegistration)
         {
             var result = new ResultViewModel<UserAswerLogin>();
+
             var user = new IdentityUser
             {
                 UserName = userRegistration.Email,
@@ -43,14 +44,10 @@ namespace RS.Identity.API.Services
             var response = await _userManager.CreateAsync(user, userRegistration.Password);
 
             if (response.Succeeded)
-            {
                 return result.AddResult(await GenerateJwt(user.Email));
-            }
 
             foreach (var error in response.Errors)
-            {
                 result.AddError(error.Description);
-            }
 
             return result;
         }
@@ -62,9 +59,7 @@ namespace RS.Identity.API.Services
             var response = await _signInManager.PasswordSignInAsync(userLogin.Email, userLogin.Password, false, true);
 
             if (response.Succeeded)
-            {
                 return result.AddResult(await GenerateJwt(userLogin.Email));
-            }
 
             return response.IsLockedOut
                 ? result.AddError(ServiceResource.BlockedUser)
